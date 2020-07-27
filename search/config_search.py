@@ -22,7 +22,7 @@ C.this_dir = C.abs_dir.split(osp.sep)[-1]
 C.root_dir = C.abs_dir[:C.abs_dir.index(C.repo_name) + len(C.repo_name)]
 
 """Data Dir"""
-C.dataset_path = "/dataset/cityscapes"
+C.dataset_path = "/dataset/cityscapes/leftImg8bit_trainvaltest"
 C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
 C.train_source = osp.join(C.dataset_path, "cityscapes_train_list.txt")

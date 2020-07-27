@@ -33,7 +33,9 @@ from model_seg import Network_Multi_Path_Infer
 
 
 def main(pretrain=True):
-    config.save = 'search-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
+    if not os.path.exists('./snapshots'):
+        os.mkdir('./snapshots')
+    config.save = 'snapshots/search-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
     create_exp_dir(config.save, scripts_to_save=glob.glob('*.py')+glob.glob('*.sh'))
     logger = SummaryWriter(config.save)
 

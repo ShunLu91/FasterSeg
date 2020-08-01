@@ -75,8 +75,8 @@ C.arch_weight_decay = 0
 C.layers = 16
 C.branch = 2
 
-C.pretrain = True
-# C.pretrain = "search-pretrain-256x512_F12.L16_batch3-20200101-012345"
+# C.pretrain = True
+C.pretrain = "snapshots/search-pretrain-256x512_F12.L16_batch3-20200727-225442"
 ########################################
 C.prun_modes = ['max', 'arch_ratio',]
 C.Fch = 12

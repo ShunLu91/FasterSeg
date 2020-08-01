@@ -122,6 +122,7 @@ class BaseDataset(data.Dataset):
 
     @staticmethod
     def _open_image(filepath, mode=cv2.IMREAD_COLOR, dtype=None, down_sampling=1):
+        print(filepath)
         # cv2: B G R
         # h w c
         img = np.array(cv2.imread(filepath, mode), dtype=dtype)

@@ -16,10 +16,13 @@ import numpy as np
 from thop import profile
 
 from config_train import config
+
+if not os.path.exists('../snapshots'):
+    os.mkdir('../snapshots')
 if config.is_eval:
-    config.save = 'eval-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
+    config.save = '../snapshots/eval-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
 else:
-    config.save = 'train-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
+    config.save = '../snapshots/train-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
 from dataloader import get_train_loader
 from datasets import Cityscapes
 

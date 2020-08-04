@@ -23,12 +23,19 @@ C.root_dir = C.abs_dir[:C.abs_dir.index(C.repo_name) + len(C.repo_name)]
 C.log_dir = osp.abspath(osp.join(C.root_dir, 'log', C.this_dir))
 
 """Data Dir"""
-C.dataset_path = "/ssd1/chenwy/cityscapes/"
+# C.dataset_path = "/ssd1/chenwy/cityscapes/"
+# C.img_root_folder = C.dataset_path
+# C.gt_root_folder = C.dataset_path
+# C.train_source = osp.join(C.dataset_path, "cityscapes_train_fine.txt")
+# C.train_eval_source = osp.join(C.dataset_path, "cityscapes_train_val_fine.txt")
+# C.eval_source = osp.join(C.dataset_path, "cityscapes_val_fine.txt")
+# C.test_source = osp.join(C.dataset_path, "cityscapes_test.txt")
+
+C.dataset_path = "/home/jp/data/lushun/dataset/cityscapes/leftImg8bit_trainvaltest"
 C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
-C.train_source = osp.join(C.dataset_path, "cityscapes_train_fine.txt")
-C.train_eval_source = osp.join(C.dataset_path, "cityscapes_train_val_fine.txt")
-C.eval_source = osp.join(C.dataset_path, "cityscapes_val_fine.txt")
+C.train_source = osp.join(C.dataset_path, "cityscapes_train_list.txt")
+C.eval_source = osp.join(C.dataset_path, "cityscapes_val_list.txt")
 C.test_source = osp.join(C.dataset_path, "cityscapes_test.txt")
 
 """Path Config"""
@@ -74,14 +81,14 @@ C.eval_width = 2048
 
 C.layers = 16
 """ Train Config """
-C.mode = "student" # "teacher" or "student"
+C.mode = "teacher" # "teacher" or "student"
 if C.mode == "teacher":
     ##### train teacher model only ####################################
     C.arch_idx = [0] # 0 for teacher
     C.branch = [2]
     C.width_mult_list = [4./12, 6./12, 8./12, 10./12, 1.,]
     C.stem_head_width = [(1, 1)]
-    C.load_path = "fasterseg" # path to the searched directory
+    C.load_path = "../snapshots/search-224x448_F12.L16_batch2-20200802-034710" # path to the searched directory
     C.load_epoch = "last" # "last" or "int" (e.g. "30"): which epoch to load from the searched architecture
     C.batch_size = 12
     C.Fch = 12
@@ -94,7 +101,7 @@ elif C.mode == "student":
     C.branch = [2, 2]
     C.width_mult_list = [4./12, 6./12, 8./12, 10./12, 1.,]
     C.stem_head_width = [(1, 1), (8./12, 8./12),]
-    C.load_path = "fasterseg" # path to the searched directory
+    C.load_path = "../snapshots/search-224x448_F12.L16_batch2-20200802-034710" # path to the searched directory
     C.teacher_path = "fasterseg" # where to load the pretrained teacher's weight
     C.load_epoch = "last" # "last" or "int" (e.g. "30")
     C.batch_size = 12

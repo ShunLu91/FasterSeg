@@ -79,7 +79,7 @@ def main():
                         'gt_root': config.gt_root_folder,
                         'train_source': config.train_source,
                         'eval_source': config.eval_source,
-                        'test_source': config.test_source,
+                        # 'test_source': config.test_source,
                         'down_sampling': config.down_sampling}
 
     train_loader = get_train_loader(config, Cityscapes, test=config.is_test)

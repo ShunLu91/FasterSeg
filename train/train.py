@@ -141,10 +141,10 @@ def main():
                                  config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0, config=config,
                                  verbose=False, save_path=None, show_image=False, show_prediction=False)
         evaluators.append(evaluator)
-        tester = SegTester(Cityscapes(data_setting, 'test', None), config.num_classes, config.image_mean,
-                                 config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0, config=config,
-                                 verbose=False, save_path=None, show_prediction=False)
-        testers.append(tester)
+        # tester = SegTester(Cityscapes(data_setting, 'test', None), config.num_classes, config.image_mean,
+        #                          config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0, config=config,
+        #                          verbose=False, save_path=None, show_prediction=False)
+        # testers.append(tester)
 
         # Optimizer ###################################
         base_lr = config.lr

@@ -36,7 +36,7 @@ C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
 C.train_source = osp.join(C.dataset_path, "cityscapes_train_list.txt")
 C.eval_source = osp.join(C.dataset_path, "cityscapes_val_list.txt")
-C.test_source = osp.join(C.dataset_path, "cityscapes_test.txt")
+# C.test_source = osp.join(C.dataset_path, "cityscapes_test.txt")
 
 """Path Config"""
 def add_path(path):

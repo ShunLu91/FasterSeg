@@ -7,7 +7,7 @@ from collections import OrderedDict
 import torch
 import torch.distributed as dist
 
-from engine.logger import get_logger
+from tools.engine.logger import get_logger
 
 logger = get_logger()
 

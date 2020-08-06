@@ -5,10 +5,10 @@ import cv2
 cv2.setNumThreads(0)
 import numpy as np
 
-from utils.visualize import print_iou, show_img, show_prediction
-from engine.evaluator import Evaluator
-from engine.logger import get_logger
-from seg_opr.metric import hist_info, compute_score
+from tools.utils.visualize import print_iou, show_img, show_prediction
+from tools.engine.evaluator import Evaluator
+from tools.engine.logger import get_logger
+from tools.seg_opr.metric import hist_info, compute_score
 
 logger = get_logger()
 

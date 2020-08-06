@@ -7,9 +7,9 @@ from tqdm import tqdm
 import torch
 import torch.multiprocessing as mp
 
-from engine.logger import get_logger
-from utils.pyt_utils import load_model, link_file, ensure_dir
-from utils.img_utils import pad_image_to_shape, normalize
+from tools.engine.logger import get_logger
+from tools.utils.pyt_utils import load_model, link_file, ensure_dir
+from tools.utils.img_utils import pad_image_to_shape, normalize
 
 logger = get_logger()
 

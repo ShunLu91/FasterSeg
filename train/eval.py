@@ -27,10 +27,10 @@ class SegEvaluator(Evaluator):
         hist_tmp, labeled_tmp, correct_tmp = hist_info(config.num_classes, pred, label)
         results_dict = {'hist': hist_tmp, 'labeled': labeled_tmp, 'correct': correct_tmp}
 
-        if self.save_path is not None:
-            fn = name + '.png'
-            cv2.imwrite(os.path.join(self.save_path, fn), pred)
-            logger.info('Save the image ' + fn)
+        # if self.save_path is not None:
+        #     fn = name + '.png'
+        #     cv2.imwrite(os.path.join(self.save_path, fn), pred)
+        #     logger.info('Save the image ' + fn)
         
         # tensorboard logger does not fit multiprocess
         if self.logger is not None and iter is not None:
@@ -48,7 +48,7 @@ class SegEvaluator(Evaluator):
                 comp_img = show_img(colors, config.background, image, clean, label, pred)
             else:
                 comp_img = show_prediction(colors, config.background, image, pred)
-            cv2.imwrite(name + ".png", comp_img[:,:,::-1])
+            cv2.imwrite(os.path.join(self.save_path, name + ".png"), comp_img[:,:,::-1])
 
         return results_dict
 

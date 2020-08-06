@@ -106,48 +106,32 @@ def main():
         init_weight(model, nn.init.kaiming_normal_, torch.nn.BatchNorm2d, config.bn_eps, config.bn_momentum,
                     mode='fan_in', nonlinearity='relu')
 
-        if arch_idx == 0 and len(config.arch_idx) > 1:
-            partial = torch.load(os.path.join(config.teacher_path, "weights%d.pt" % arch_idx))
-            state = model.state_dict()
-            pretrained_dict = {k: v for k, v in partial.items() if k in state}
-            state.update(pretrained_dict)
-            model.load_state_dict(state)
-        elif config.is_eval:
-            partial = torch.load(os.path.join(config.eval_path, "weights%d.pt" % arch_idx))
-            state = model.state_dict()
-            pretrained_dict = {k: v for k, v in partial.items() if k in state}
-            state.update(pretrained_dict)
-            model.load_state_dict(state)
+        partial = torch.load(os.path.join(config.eval_path, "weights%d.pt" % arch_idx))
+        state = model.state_dict()
+        pretrained_dict = {k: v for k, v in partial.items() if k in state}
+        state.update(pretrained_dict)
+        model.load_state_dict(state)
 
         evaluator = SegEvaluator(Cityscapes(data_setting, 'val', None), config.num_classes, config.image_mean,
                                  config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0,
                                  config=config,
-                                 verbose=False, save_path=None, show_image=False, show_prediction=False)
+                                 verbose=False, save_path=config.save, show_image=True, show_prediction=True)
         evaluators.append(evaluator)
-
-        # Optimizer ###################################
-        base_lr = config.lr
-        if arch_idx == 1 or len(config.arch_idx) == 1:
-            # optimize teacher solo OR student (w. distill from teacher)
-            optimizer = torch.optim.SGD(model.parameters(), lr=base_lr, momentum=config.momentum,
-                                        weight_decay=config.weight_decay)
         models.append(model)
 
     # Cityscapes ###########################################
-    if config.is_eval:
-        logging.info(config.load_path)
-        logging.info(config.eval_path)
-        logging.info(config.save)
-        with torch.no_grad():
-            # validation
-            print("[validation...]")
-            valid_mIoUs = infer(models, evaluators, logger=None)
-            for idx, arch_idx in enumerate(config.arch_idx):
-                if arch_idx == 0:
-                    logging.info("teacher's valid_mIoU %.3f" % (valid_mIoUs[idx]))
-                else:
-                    logging.info("student's valid_mIoU %.3f" % (valid_mIoUs[idx]))
-        exit(0)
+    logging.info(config.load_path)
+    logging.info(config.eval_path)
+    logging.info(config.save)
+    with torch.no_grad():
+        # validation
+        print("[validation...]")
+        valid_mIoUs = infer(models, evaluators, logger=None)
+        for idx, arch_idx in enumerate(config.arch_idx):
+            if arch_idx == 0:
+                logging.info("teacher's valid_mIoU %.3f" % (valid_mIoUs[idx]))
+            else:
+                logging.info("student's valid_mIoU %.3f" % (valid_mIoUs[idx]))
 
 
 def infer(models, evaluators, logger):

@@ -26,6 +26,8 @@ config.save = '../snapshots/predict-{}-{}'.format(config.save, time.strftime("%Y
 
 
 def main():
+    create_exp_dir(config.save, scripts_to_save=glob.glob('*.py')+glob.glob('*.sh'))
+
     log_format = '%(asctime)s %(message)s'
     logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
     logging.info("args = %s", str(config))

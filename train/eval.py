@@ -2,6 +2,7 @@
 # encoding: utf-8
 import os
 import cv2
+
 cv2.setNumThreads(0)
 import numpy as np
 
@@ -31,7 +32,7 @@ class SegEvaluator(Evaluator):
         #     fn = name + '.png'
         #     cv2.imwrite(os.path.join(self.save_path, fn), pred)
         #     logger.info('Save the image ' + fn)
-        
+
         # tensorboard logger does not fit multiprocess
         if self.logger is not None and iter is not None:
             colors = self.dataset.get_class_colors()
@@ -46,9 +47,11 @@ class SegEvaluator(Evaluator):
             clean = np.zeros(label.shape)
             if self.show_image:
                 comp_img = show_img(colors, config.background, image, clean, label, pred)
+                cv2.imwrite(os.path.join(self.save_path, 'img' + name + ".png"), comp_img[:, :, ::-1])
+
             else:
                 comp_img = show_prediction(colors, config.background, image, pred)
-            cv2.imwrite(os.path.join(self.save_path, name + ".png"), comp_img[:,:,::-1])
+                cv2.imwrite(os.path.join(self.save_path, 'pred' + name + ".png"), comp_img[:, :, ::-1])
 
         return results_dict
 

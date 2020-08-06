@@ -115,7 +115,7 @@ def main():
         evaluator = SegEvaluator(
             Cityscapes(data_setting, 'val', None), config.num_classes, config.image_mean,
             config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0,
-            config=config, verbose=False, save_path=os.path.join(config.save, 'predictions'), show_image=False,
+            config=config, verbose=False, save_path=os.path.join(config.save, 'predictions'), show_image=True,
             show_prediction=True
         )
         evaluators.append(evaluator)

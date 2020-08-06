@@ -26,7 +26,7 @@ config.save = '../snapshots/predict-{}-{}'.format(config.save, time.strftime("%Y
 
 
 def main():
-    create_exp_dir(config.save, scripts_to_save=glob.glob('*.py')+glob.glob('*.sh'))
+    create_exp_dir(config.save, scripts_to_save=glob.glob('*.py') + glob.glob('*.sh'))
 
     log_format = '%(asctime)s %(message)s'
     logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
@@ -112,10 +112,12 @@ def main():
         state.update(pretrained_dict)
         model.load_state_dict(state)
 
-        evaluator = SegEvaluator(Cityscapes(data_setting, 'val', None), config.num_classes, config.image_mean,
-                                 config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0,
-                                 config=config,
-                                 verbose=False, save_path=config.save, show_image=True, show_prediction=True)
+        evaluator = SegEvaluator(
+            Cityscapes(data_setting, 'val', None), config.num_classes, config.image_mean,
+            config.image_std, model, config.eval_scale_array, config.eval_flip, 0, out_idx=0,
+            config=config, verbose=False, save_path=os.path.join(config.save, 'predictions'), show_image=False,
+            show_prediction=True
+        )
         evaluators.append(evaluator)
         models.append(model)
 

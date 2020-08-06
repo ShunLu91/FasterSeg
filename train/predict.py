@@ -9,31 +9,18 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 import torch.utils
-import torch.nn.functional as F
-from tensorboardX import SummaryWriter
 
 import numpy as np
 from thop import profile
 
 from config_train import config
-
-if not os.path.exists('../snapshots'):
-    os.mkdir('../snapshots')
-if config.is_eval:
-    config.save = '../snapshots/eval-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
-else:
-    config.save = '../snapshots/train-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
-from dataloader import get_train_loader
 from datasets import Cityscapes
 
 from utils.init_func import init_weight
-from seg_opr.loss_opr import ProbOhemCrossEntropy2d
 from eval import SegEvaluator
-from test import SegTester
 
 from utils.darts_utils import create_exp_dir, save, plot_op, plot_path_width, objective_acc_lat
 from model_seg import Network_Multi_Path_Infer as Network
-import seg_metrics
 
 config.save = '../snapshots/predict-{}-{}'.format(config.save, time.strftime("%Y%m%d-%H%M%S"))
 

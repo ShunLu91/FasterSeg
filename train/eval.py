@@ -47,11 +47,10 @@ class SegEvaluator(Evaluator):
             clean = np.zeros(label.shape)
             if self.show_image:
                 comp_img = show_img(colors, config.background, image, clean, label, pred)
-                cv2.imwrite(os.path.join(self.save_path, 'img' + name + ".png"), comp_img[:, :, ::-1])
-
-            else:
+                cv2.imwrite(os.path.join(self.save_path, 'img-' + name + ".png"), comp_img[:, :, ::-1])
+            if self.show_prediction:
                 comp_img = show_prediction(colors, config.background, image, pred)
-                cv2.imwrite(os.path.join(self.save_path, 'pred' + name + ".png"), comp_img[:, :, ::-1])
+                cv2.imwrite(os.path.join(self.save_path, 'pred-' + name + ".png"), comp_img[:, :, ::-1])
 
         return results_dict
 

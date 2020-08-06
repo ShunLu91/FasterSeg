@@ -53,8 +53,8 @@ def main():
     logging.getLogger().addHandler(fh)
     logging.info("args = %s", str(config))
     # preparation ################
-    # torch.backends.cudnn.enabled = True
-    # torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = True
     seed = config.seed
     np.random.seed(seed)
     torch.manual_seed(seed)

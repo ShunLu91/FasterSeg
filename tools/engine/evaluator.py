@@ -208,8 +208,9 @@ class Evaluator(object):
             img, margin = self.process_image(img, input_size)
         else:
             img = self.process_image(img, input_size)
-
+        t_forward = time.time()
         pred = self.val_func_process(img, device)
+        print('elapse:', time.time() - t_forward)
         if input_size is not None:
             pred = pred[:, margin[0]:(pred.shape[1] - margin[1]),
                    margin[2]:(pred.shape[2] - margin[3])]

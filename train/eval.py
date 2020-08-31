@@ -22,6 +22,7 @@ class SegEvaluator(Evaluator):
         name = data['fn']
 
         if len(config.eval_scale_array) == 1:
+            print('******* whole_eval *******')
             pred = self.whole_eval(img, None, device)
         else:
             pred = self.sliding_eval(img, config.eval_crop_size, config.eval_stride_rate, device)

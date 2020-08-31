@@ -25,6 +25,7 @@ class SegEvaluator(Evaluator):
             print('******* whole_eval *******')
             pred = self.whole_eval(img, None, device)
         else:
+            print('******* sliding_eval *******')
             pred = self.sliding_eval(img, config.eval_crop_size, config.eval_stride_rate, device)
         hist_tmp, labeled_tmp, correct_tmp = hist_info(config.num_classes, pred, label)
         results_dict = {'hist': hist_tmp, 'labeled': labeled_tmp, 'correct': correct_tmp}

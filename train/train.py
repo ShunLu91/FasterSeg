@@ -122,7 +122,7 @@ def main():
             last = [2, 1]
         lasts.append(last)
         model.build_structure(last)
-        logging.info("net: " + str(model))
+        # logging.info("net: " + str(model))
         for b in last:
             if len(config.width_mult_list) > 1:
                 plot_op(getattr(model, "ops%d" % b), getattr(model, "path%d" % b), width=getattr(model, "widths%d" % b),

@@ -34,12 +34,8 @@ from test import SegTester
 from utils.darts_utils import create_exp_dir, save, plot_op, plot_path_width, objective_acc_lat
 from model_seg import Network_Multi_Path_Infer as Network
 import seg_metrics
-try:
-    from utils.darts_utils import compute_latency_ms_tensorrt as compute_latency
-    print("use TensorRT for latency test")
-except:
-    from utils.darts_utils import compute_latency_ms_pytorch as compute_latency
-    print("use PyTorch for latency test")
+from utils.darts_utils import compute_latency_ms_pytorch as compute_latency
+print("use PyTorch for latency test")
 
 
 def adjust_learning_rate(base_lr, power, optimizer, epoch, total_epoch):

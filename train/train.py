@@ -298,8 +298,8 @@ def infer(models, evaluators, logger):
     for model, evaluator in zip(models, evaluators):
         model.eval()
         logging.info('model latency: %s' % compute_latency(model, (1, 3, config.image_height, config.image_width)))
-        # _, mIoU = evaluator.run_online()
-        _, mIoU = evaluator.run_online_multiprocess()
+        _, mIoU = evaluator.run_online()
+        # _, mIoU = evaluator.run_online_multiprocess()
         mIoUs.append(mIoU)
     return mIoUs
 
